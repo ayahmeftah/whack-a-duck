@@ -12,6 +12,7 @@ function init(){
         // append this cell to our grid
         for (let i = 0; i < numberOfCells; i++){
             const cell = document.createElement('div');
+            cell.classList.add('duck');
             cell.textContent = i;
             cells.push(cell);
             gridElem.appendChild(cell);
