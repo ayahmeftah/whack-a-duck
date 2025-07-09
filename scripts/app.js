@@ -1,4 +1,4 @@
-function init(){
+function init() {
 
     // cached refrences
     const gridElem = document.querySelector('.grid');
@@ -7,30 +7,44 @@ function init(){
 
     const cells = []
     const gridWidth = 10
-    const numberOfCells = gridWidth*gridWidth
+    const numberOfCells = gridWidth * gridWidth
 
-    let duckPosition = 58
+    let totalDucks = 0
+    let duckPosition = 3
     let score = 0
 
-
-    function addDuck(){
-        cells[duckPosition].classList.add('duck')
+    function endGame(){
+        alert('Game ended, score: '+ score)
+        score = 0
+        scoreElem.textContent = `Your score is ${score}`
+        totalDucks = 0
     }
-    
-    function removeDuck(){
+
+    function addDuck() {
+        cells[duckPosition].classList.add('duck')
+        totalDucks++
+    }
+
+    function removeDuck() {
         cells[duckPosition].classList.remove('duck')
     }
-    
-    function play(){
+
+    function play() {
         setInterval(() => {
-            removeDuck()
-            duckPosition = Math.floor(Math.random() * numberOfCells)
-            addDuck()
-        }, 3000);
+            if (totalDucks < 10) {
+                removeDuck()
+                duckPosition = Math.floor(Math.random() * numberOfCells)
+                addDuck()
+            } else {
+                endGame()
+                
+            }
+
+        }, 1000);
     }
 
-    function handleClick(event){
-        if(event.target.classList.contains('duck')){
+    function handleClick(event) {
+        if (event.target.classList.contains('duck')) {
             audioElem.pause()
             audioElem.currentTime = 0
             score += 10
@@ -40,10 +54,10 @@ function init(){
         }
     }
 
-    function createGrid(){
+    function createGrid() {
         // for every cell that we require create a div 
         // append this cell to our grid
-        for (let i = 0; i < numberOfCells; i++){
+        for (let i = 0; i < numberOfCells; i++) {
             const cell = document.createElement('div');
             // cell.classList.add('duck');
             cell.textContent = i;
@@ -54,9 +68,9 @@ function init(){
         }
         console.log(cells)
     }
-    
+
     createGrid()
     play()
 }
 
-document.addEventListener('DOMContentLoaded',init);
+document.addEventListener('DOMContentLoaded', init);
