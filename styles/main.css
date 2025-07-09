@@ -15,7 +15,7 @@
 }
 
 .duck {
-    background-image: url('../images/duck.jpg');
+    background-image: url('../assets/duck.jpg');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;

@@ -3,6 +3,7 @@ function init(){
     // cached refrences
     const gridElem = document.querySelector('.grid');
     const scoreElem = document.querySelector('#score-display');
+    const audioElem = document.querySelector('#quack')
 
     const cells = []
     const gridWidth = 10
@@ -10,6 +11,7 @@ function init(){
 
     let duckPosition = 58
     let score = 0
+
 
     function addDuck(){
         cells[duckPosition].classList.add('duck')
@@ -29,7 +31,10 @@ function init(){
 
     function handleClick(event){
         if(event.target.classList.contains('duck')){
+            audioElem.pause()
+            audioElem.currentTime = 0
             score += 10
+            audioElem.play()
             scoreElem.textContent = `Your score is ${score}`
             console.log(score)
         }
